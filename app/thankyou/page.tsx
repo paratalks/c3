@@ -9,22 +9,22 @@ import {
 } from "@/components/ui/card";
 import { CheckCircle, Home } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 import Script from "next/script";
 
 export default function ThankYouPage() {
-  const searchParams = useSearchParams();
-  const studentDetails = {
-    transactionId: searchParams.get("transactionId")!,
-    name: searchParams.get("name")!,
-    phone: searchParams.get("phone")!,
-    city: searchParams.get("city")!,
-    class: searchParams.get("class"),
-  };
-  useEffect(() => {
-    console.log(studentDetails);
-  }, []);
+  // const searchParams = useSearchParams();
+  // const studentDetails = {
+  //   transactionId: searchParams.get("transactionId")!,
+  //   name: searchParams.get("name")!,
+  //   phone: searchParams.get("phone")!,
+  //   city: searchParams.get("city")!,
+  //   class: searchParams.get("class"),
+  // };
+  // useEffect(() => {
+  //   console.log(studentDetails);
+  // }, []);
   return (
     <Suspense>
       <div className="min-h-screen flex flex-col bg-gradient-to-b from-primary/20 to-background">
@@ -63,6 +63,32 @@ export default function ThankYouPage() {
           <p>
             &copy; {new Date().getFullYear()} Competishun. All rights reserved.
           </p>
+          <Script id={"gtagImplementation2"}>
+            {`window.addEventListener("load", function () {
+          if (window.location.href.indexOf('/thankyou') != -1 && window.location.href.indexOf('?name=') != -1) {
+            var totalVal = decodeURIComponent(window.location.href).split("transactionId=")[1].split("&")[0]
+            var orderId = decodeURIComponent(window.location.href).split("amount=")[1].split("&")[0]
+            gtag("event", "conversion", {
+              send_to: "AW-10838004875/GwYGCL6oxeEZEIup-68o",
+              value: parseFloat(totalVal),
+              currency: "INR",
+              transaction_id: orderId,
+            })
+          }
+          if (window.location.pathname.includes("/thankyou") != -1) {
+            gtag("event", "conversion", {
+              send_to: "AW-10838004875/gddNCMGoxeEZEIup-68o",
+            })
+          }
+        })`}
+          </Script>
+          <Script id={"userEmailCapture"}>
+            {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('set', 'user_data', {"email": user_email});
+          gtag('config','AW-10838004875', {'allow_enhanced_conversions':true});`}
+          </Script>
         </footer>
       </div>
     </Suspense>
