@@ -68,21 +68,6 @@ body html{
     padding: 1px;
 }
 
-@media only screen and (max-height: 900px) {
-    .modelImageContainer {
-        scale: 0.9;
-    }
-    .mentorImages {
-        scale: 0.8;
-    }
-    .mentor-section-heading{
-        scale: 0.8;
-    }
-    .hero-section{
-        height: 120vh;
-    }
-
-}
 
 @media only screen and (max-height: 600px) {
     .hero-section{

@@ -54,6 +54,7 @@ export default function Home() {
       },
     );
   };
+
   useEffect(() => {
     setScreen({ width: window.innerWidth, height: window.innerHeight });
 
@@ -94,9 +95,11 @@ export default function Home() {
         id="chat-widget"
         data-key="670f87c42f6b943716677af3"
       ></div>
-      <div className={"md:w-10/12 w-11/12 flex flex-col"}>
+      <div className={"w-11/12 flex flex-col"}>
         <section
-          className={"hero-section flex flex-col w-full min-h-screen relative"}
+          className={
+            "hero-section flex flex-col w-full h-[120vh] md:h-screen relative"
+          }
         >
           <div
             className={
@@ -212,7 +215,7 @@ export default function Home() {
                 animate={{ y: [0, 5, 0] }}
                 transition={{ duration: 2, ease: "backOut", repeat: Infinity }}
                 className={
-                  "gradientBorder primary-button-animation absolute sm:bottom-[15%] bottom-[10%] md:left-[12%] left-0 rounded-2xl "
+                  "gradientBorder primary-button-animation absolute sm:bottom-[15%] bottom-[10%] md:left-[12%] left-0 rounded-2xl z-20"
                 }
               >
                 <div
@@ -307,9 +310,9 @@ export default function Home() {
                 " text-xs sm:text-xl lg:text-lg mt-6 sm:mt-3 text-center xl:w-1/2 w-full mb-6 lg:mb-2 max-sm:text-gray-500"
               }
             >
-              {`The Competishun High Achiever’s Main Program (CHAMP - 2025) is a specialized revision course designed to help students unlock excel in the JEE Main examination. `}
+              {`The Competishun Crash Course (C³ - 2025) is an intensive and focused program designed to help students maximize their potential and achieve exceptional results in the JEE Main examination`}
             </p>
-            <a href="#pricing-section">
+            <a href="#pricing-section" className={"z-20"}>
               <motion.button
                 animate={{
                   scale: [1, 1.2, 1],
@@ -321,7 +324,7 @@ export default function Home() {
                   duration: 1,
                 }}
                 className={
-                  "bg-primary max-sm:mt-2 max-sm:text-nowrap primary-button-animation font-bold lg:text-2xl sm:text-lg md:text-xl text-lg max- p-2 sm:p-3 px-3 sm:px-5 rounded-2xl w-fit items-center"
+                  "bg-primary max-sm:mt-2 max-sm:text-nowrap primary-button-animation font-bold lg:text-2xl sm:text-lg md:text-xl text-lg max- p-2 sm:p-3 px-3 sm:px-5 rounded-2xl w-fit items-center z-20"
                 }
               >
                 Join Now <span className={"ml-2"}>🏆</span>
@@ -418,7 +421,7 @@ export default function Home() {
         <div className={"relative h-[50dvh] flex flex-col items-center"}>
           <footer className=" absolute h-full  w-screen bg-background ">
             <div className=" w-full h-full p-4 py-6 lg:py-8">
-              <div className="md:flex md:justify-between p-20">
+              <div className="md:flex md:justify-between p-2 sm:p-10 md:p-20">
                 <div className="mb-10 md:mb-0 lg:w-5/12 ">
                   <a
                     href="/"
@@ -436,16 +439,16 @@ export default function Home() {
                     </span>
                   </a>
                   <p className={"mt-5"}>
-                    {`Competishun is a well-known name in the field of IIT-JEE/NEET Online & Offline Coaching providing Pre-Engineering/Pre-Medical training to aspirants intending to prepare and appear in various competitive, talent search and scholarship examinations of National and International level such as JEE (Main + Advanced) formerly IIT-JEE (Indian Institute of Technology - Joint Entrance Examination). JEE (Main) (formerly AIEEE-All India Engineering Entrance Examination), NEET (National Eligibility cum Entrance Test), BITSAT (Birla Institute of Technology & Science Admission Test) etc. `}
+                    {`Competishun is a well-known name in the field of IIT-JEE/NEET Online & Offline Coaching providing Pre-Engineering/Pre-Medical training to aspirants intending to prepare and appear in various competitive, talent search and scholarship examinations of National and International level such as JEE,NEET,BITSAT,etc `}
                   </p>
                 </div>
                 <div className="grid w-full lg:w-1/2 h-full grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                   <div className={"border-r"}>
                     <div>
-                      <h2 className="mb-6 text-xs sm:text-sm lg:text-xl font-semibold text-gray-900 uppercase text-white">
+                      <h2 className="mb-6 text-xs sm:text-sm lg:text-xl font-semibold uppercase text-white">
                         Support
                       </h2>
-                      <ul className="text-gray-500 text-gray-400 font-medium">
+                      <ul className=" text-gray-400 font-medium">
                         <li className="mb-4">
                           <a href="/" className="hover:text-white">
                             Help
@@ -460,12 +463,7 @@ export default function Home() {
                           </a>
                         </li>
                         <li className={"hover:text-white"}>
-                          <a
-                            href="https://tailwindcss.com/"
-                            className="hover:underline"
-                          >
-                            FAQ
-                          </a>
+                          <a href="https://tailwindcss.com/">FAQ</a>
                         </li>
                       </ul>
                     </div>

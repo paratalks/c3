@@ -29,7 +29,7 @@ const Testimonials = () => {
             "testimonial-section-content z-10 relative flex flex-col gap-y-24 items-center justify-center w-full"
           }
         >
-          <h1 className={"text-3xl sm:text-3xl lg:text-5xl"}>
+          <h1 className={"text-3xl sm:text-3xl lg:text-5xl text-center"}>
             {`Hear from our `}
             <ScribledHighlightedText
               textInput={"Champions!"}

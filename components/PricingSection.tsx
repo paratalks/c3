@@ -50,7 +50,7 @@ const PricingSection = () => {
                   {`Revise Smarter, Score Higher with Experts mentors in
                     Competishun. Let's Crack JEE 2025`}
                 </p>
-                <a href="https://rzp.io/rzp/YfK1Axui">
+                <a href="/enrollment">
                   <motion.button
                     id={"joinButtonPricingSection"}
                     animate={{ scale: [1, 1.1, 1] }}
@@ -100,7 +100,7 @@ const PricingSection = () => {
                         "text-6xl sm:text-7xl lg:text-8xl font-bold transition-all duration-200"
                       }
                     >
-                      ₹ 2999
+                      ₹ 3999
                     </h2>
                   </div>
                   <ul
@@ -127,7 +127,7 @@ const PricingSection = () => {
                         className={"bg-foreground p-1 rounded-full"}
                         color={"#F15E04"}
                       />
-                      ₹ 2549 upon meeting above criteria
+                      ₹ 3389 upon meeting above criteria
                     </li>
                     <li className={"flex flex-row gap-x-2"}>
                       <Check
