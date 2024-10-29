@@ -479,7 +479,7 @@ export default function Home() {
                           </a>
                         </li>
                         <li className={"hover:text-white"}>
-                          <a href="https://tailwindcss.com/">FAQ</a>
+                          <a href="https://c3.competishun.in/">FAQ</a>
                         </li>
                       </ul>
                     </div>
@@ -510,7 +510,7 @@ export default function Home() {
                 <span className="text-sm  sm:text-center  text-gray-400">
                   © 2024{" "}
                   <a
-                    href="https://competishun.com/"
+                    href="https://c3.competishun.in/"
                     className="hover:underline"
                   >
                     Competishun™
