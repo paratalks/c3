@@ -1,130 +1,284 @@
-import React, { ReactNode, useState } from "react";
-import ScribledHighlightedText from "@/components/ScribledHighlightedText";
-import { ArrowRight, Check, MoveRight, NotebookPen } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { blurs, images } from "@/constants";
 import Image from "next/image";
-import { icons, illustrations, images, prospectusCategory } from "@/constants";
 import { motion } from "framer-motion";
-import PricingSection from "@/components/PricingSection";
-
-const ProspectusSection = () => {
-  const [selectedCourse, setSelectedCourse] = useState(-1);
-  const [selectedCategory, setSelectedCategory] = useState(0);
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import AutoPlay from "embla-carousel-autoplay";
+import { getStatsData } from "@/lib/fetchData";
+const StatisticSection = () => {
+  const statsData = useRef<any>();
+  const fetchData = async () => {
+    await getStatsData().then((res) => (statsData.current = res.documents));
+  };
+  useEffect(() => {
+    fetchData();
+  }, [statsData]);
   return (
     <section
-      id={"prospectusSection"}
-      className={"w-full h-full flex flex-col items-center relative"}
+      onLoad={() => console.log(statsData.current)}
+      className={"w-full h-full relative flex flex-col items-center mt-32"}
     >
+      <div className={"absolute w-screen h-full"}>
+        <Image
+          unoptimized
+          src={blurs.statisticsBlur}
+          className={"absolute w-screen -z-40"}
+          alt={"bg-blur"}
+          fill
+          objectFit={"cover"}
+        />
+      </div>
       <div
         className={
-          "section-content w-9/12 h-full  md:pt-40 z-40 flex flex-col items-center gap-y-16"
+          "section-content w-full h-full p-20 z-40 flex flex-col items-center gap-20 sm:gap-32"
         }
       >
-        <motion.img
-          src={icons.flower}
-          className={"absolute hidden sm:flex top-48 right-40 opacity-50 "}
-          alt={"bg-blur"}
-          width={70}
-          height={70}
-        />
-        <motion.img
-          src={icons.flower}
-          className={"absolute hidden sm:flex -bottom-40 left-0 opacity-50 "}
-          alt={"bg-blur"}
-          width={70}
-          height={70}
-        />
-        <div className={"w-full flex flex-col items-center justify-center"}>
-          <h1
-            className={
-              "section-title text-3xl sm:text-3xl lg:text-5xl font-bold text-center"
-            }
-          >
-            Course{" "}
-            <ScribledHighlightedText
-              textInput={"Prospectus"}
-              path={
-                "M234.304 11.0649C186.115 -4.21814 93.454 -1.63255 45.8907 11.7409C24.2292 17.8316 -15.714 35.4796 8.59158 52.1415C12.8785 55.0804 18.0894 57.468 23.4807 59.5339C82.8146 82.2695 165.57 79.9541 229.248 66.3502C238.745 64.3213 248.091 61.9127 256.688 58.6392C263.119 56.1909 269.336 53.1563 274.343 49.6149C289.002 39.2476 285.173 28.8142 269.401 20.025C251.115 9.8345 226.11 6.67652 202.515 4.94703C181.883 3.43475 161.277 3.14436 140.548 3.76156C101.671 4.91893 56.8684 6.76051 24.2624 20.6927C10.021 26.7781 -5.27958 39.7816 6.92788 50.3061C20.1563 61.7105 51.3472 65.4033 72.3265 67.8098C128.922 74.3022 218.472 71.0829 270.024 54.046C275.583 52.2087 281.215 50.4966 286.188 48.0806C290.117 46.1716 293.879 43.9949 297.143 41.6392C320.273 24.9445 268.661 14.4476 250.459 12.645C193.198 6.97415 108.448 -1.20946 55.7131 13.876"
-              }
-            />
-          </h1>
-          <p
-            className={
-              "mt-2 text-xs sm:text-sm lg:text-lg  text-gray-400 text-center"
-            }
-          >
-            Choose the Course That Matches Your Learning Style and Pace,
-            Designed to Maximize Your scores.
-          </p>
-        </div>
-        <div className={"gradientBorder rounded-full max-sm:scale-75"}>
-          <div className={"w-full bg-[#1D131E] p-3 rounded-full"}>
-            <div
+        <h1
+          className={
+            "section-title text-3xl sm:text-3xl lg:text-5xl font-bold text-center"
+          }
+        >
+          Join <span className={"text-primary"}>Competishun</span> <br />{" "}
+          Community, Your way to IIT
+        </h1>
+        <div
+          className={
+            "h-full w-screen flex flex-col  items-center justify-center"
+          }
+        >
+          <div className={"flex flex-row justify-between w-full px-5  z-10"}>
+            <motion.div
+              whileInView={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
               className={
-                "flex flex-row justify-between items-center h-full w-full gap-x-5"
+                " md:absolute popAnimation bg-purple-800 rounded-3xl border border-white flex flex-col items-center p-2 sm:p-3 lg:p-5 top-[30%] lg:left-[15%] left-0 scale-0 shadow-[0px_6px_35px_-7px_rgba(0,0,0,1)] drop-shadow-lg shadow-purple-500"
               }
             >
-              {prospectusCategory.map((item, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => {
-                    setSelectedCategory(index);
-                  }}
-                  className={`${selectedCategory == index ? "bg-primary" : "bg-transparent"} text-nowrap w-full h-fit flex flex-col md:flex-row gap-2 px-5 sm:px-8 py-3 bg-primary rounded-full items-center lg:flex-nowrap transition-all duration-500`}
+              <h2 className={"text-center text-xs sm:text-lg lg:text-xl"}>
+                <span
+                  className={"sm:text-2xl lg:text-3xl text-xs font-extrabold"}
                 >
-                  <NotebookPen className={"hidden sm:inline"} />
-                  <p className={"text-xs sm:text-sm md:text-lg lg:text-xl"}>
-                    {item.title}
-                  </p>
-                </motion.button>
-              ))}
-            </div>
+                  {statsData.current
+                    ? statsData.current[0].statsDesc1
+                    : `12k+ \n Aspiring IITians`}{" "}
+                  <br /> Selection
+                </span>{" "}
+              </h2>
+            </motion.div>
+            <motion.div
+              whileInView={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className={
+                " md:absolute popAnimation bg-primary rounded-3xl border border-white flex flex-col items-center p-2 sm:p-3 lg:p-5 top-[35%] lg:right-[10%] right-0 shadow-[0px_6px_35px_-7px_rgba(0,0,0,1)] drop-shadow-lg shadow-primary"
+              }
+            >
+              <h2 className={"text-center text-xs sm:text-lg lg:text-xl"}>
+                <span
+                  className={"sm:text-2xl lg:text-3xl text-xs font-extrabold"}
+                >
+                  {statsData.current
+                    ? statsData.current[0].statsDesc2
+                    : `12k+ \n Aspiring IITians`}
+                  <br /> Selection
+                </span>
+              </h2>
+            </motion.div>
           </div>
-        </div>
-        <div className={"flex flex-row justify-between"}>
-          <div
-            className={
-              "flex flex-col sm:flex-row justify-center  gap-y-10  gap-x-14 w-full flex-wrap "
-            }
+          <Carousel
+            plugins={[
+              AutoPlay({
+                delay: 3000,
+              }),
+            ]}
+            opts={{
+              loop: true,
+            }}
+            className={"w-full gap-0 flex justify-center"}
           >
-            {...Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                onMouseEnter={() => {
-                  setSelectedCourse(i);
-                }}
-                onMouseLeave={() => {
-                  setSelectedCourse(-1);
-                }}
-                className={`${selectedCourse != -1 && selectedCourse != i ? "blur-md" : "blur-none"} hover:bg-primary coursesItem bg-primary/[0.8] w-full sm:w-1/3 md:w-1/4 group hover:scale-125 transition-all duration-300 flex flex-row gap-x-8 rounded-3xl p-2 border border-white items-start justify-start`}
+            <CarouselContent className={"w-full"}>
+              {/*{...Array.from({ length: 3 }).map((_, index) => (*/}
+              <CarouselItem
+                className={"flex flex-row gap-x-0 p-0 w-fit justify-center "}
               >
-                <div className={"flex flex-col h-full p-2 w-full gap-2"}>
-                  <div className={"p-1 bg-foreground rounded-full w-fit"}>
-                    <Check color={"#F15E04"} />
-                  </div>
-                  <h3 className={"text-2xl font-extrabold h-1/2"}>
-                    {`JEE ${prospectusCategory[selectedCategory].title} ${i}`}
-                  </h3>
-                  <p className={"text-sm text-gray-300"}>
-                    Thorougly, covers all important topics across Physics,
-                    Chemistry, Mathematics with expertly designed theory
-                    classes.
-                  </p>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
+                <div
+                  className={
+                    "gradientBorder relative rounded-3xl w-fit flex flex-col items-center"
+                  }
+                  style={{ padding: 2 }}
+                >
+                  <div
                     className={
-                      "bg-foreground text-background group-hover:bg-foreground secondary-button-animation rounded-xl w-fit px-4 py-2 flex flex-row font-bold gap-x-2"
+                      "absolute z-10 w-full h-full flex flex-col items-center rounded-3xl bg-gradient-to-t from-black to-transparent"
+                    }
+                  />
+                  <h2
+                    className={
+                      "absolute bottom-10 z-10 text-2xl sm:text-3xl px-3 sm:px-5 font-extrabold text-gray-300"
                     }
                   >
-                    Join Now
-                    <ArrowRight />
-                  </motion.button>
+                    🎊 <span className={"text-primary"}>1000+</span> Selection
+                    in JEE Mains 🎊
+                  </h2>
+                  <Image
+                    unoptimized
+                    src={
+                      statsData.current &&
+                      statsData.current[0].carouselLink1 != null
+                        ? statsData.current[0].carouselLink1
+                        : images.statsBoy
+                    }
+                    alt={"Competishun Stats"}
+                    width={500}
+                    height={500}
+                    objectFit={"cover"}
+                    className={"rounded-3xl"}
+                  />
                 </div>
-              </div>
-            ))}
+              </CarouselItem>
+              <CarouselItem
+                className={"flex flex-row gap-x-0 p-0 w-fit justify-center "}
+              >
+                <div
+                  className={
+                    "gradientBorder relative rounded-3xl w-fit flex flex-col items-center"
+                  }
+                  style={{ padding: 2 }}
+                >
+                  <div
+                    className={
+                      "absolute z-10 w-full h-full flex flex-col items-center rounded-3xl bg-gradient-to-t from-black to-transparent"
+                    }
+                  />
+                  <h2
+                    className={
+                      "absolute bottom-10 z-10 text-2xl sm:text-3xl px-3 sm:px-5 font-extrabold text-gray-300"
+                    }
+                  >
+                    🎊 <span className={"text-primary"}>1000+</span> Selection
+                    in JEE Mains 🎊
+                  </h2>
+                  <Image
+                    unoptimized
+                    src={
+                      statsData.current &&
+                      statsData.current[0].carouselLink2 != null
+                        ? statsData.current[0].carouselLink2
+                        : images.statsBoy
+                    }
+                    alt={"Competishun Stats"}
+                    width={500}
+                    height={500}
+                    objectFit={"cover"}
+                    className={"rounded-3xl"}
+                  />
+                </div>
+              </CarouselItem>
+              <CarouselItem
+                className={"flex flex-row gap-x-0 p-0 w-fit justify-center "}
+              >
+                <div
+                  className={
+                    "gradientBorder relative rounded-3xl w-fit flex flex-col items-center"
+                  }
+                  style={{ padding: 2 }}
+                >
+                  <div
+                    className={
+                      "absolute z-10 w-full h-full flex flex-col items-center rounded-3xl bg-gradient-to-t from-black to-transparent"
+                    }
+                  />
+                  <h2
+                    className={
+                      "absolute bottom-10 z-10 text-2xl sm:text-3xl px-3 sm:px-5 font-extrabold text-gray-300"
+                    }
+                  >
+                    🎊 <span className={"text-primary"}>1000+</span> Selection
+                    in JEE Mains 🎊
+                  </h2>
+                  <Image
+                    unoptimized
+                    src={
+                      statsData.current &&
+                      statsData.current[0].carouselLink3 != null
+                        ? statsData.current[0].carouselLink3
+                        : images.statsBoy
+                    }
+                    alt={"Competishun Stats"}
+                    width={500}
+                    height={500}
+                    objectFit={"cover"}
+                    className={"rounded-3xl"}
+                  />
+                </div>
+              </CarouselItem>
+              {/*))}*/}
+            </CarouselContent>
+          </Carousel>
+          <div
+            className={
+              "flex flex-row justify-between w-full px-5 relative z-10"
+            }
+          >
+            <motion.div
+              whileInView={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className={
+                "md:absolute popAnimation bg-green-700 rounded-3xl border border-white flex flex-col items-center p-2 sm:p-3 lg:p-5 bottom-[30%] lg:right-[20%] right-0 scale-0 shadow-[0px_6px_35px_-7px_rgba(0,0,0,1)] drop-shadow-lg shadow-green-500"
+              }
+            >
+              <h2 className={"text-center text-xs sm:text-lg lg:text-xl"}>
+                <span
+                  className={"sm:text-2xl lg:text-3xl text-xs font-extrabold"}
+                >
+                  {statsData.current
+                    ? statsData.current[0].statsDesc3
+                    : `12k+ \n Aspiring IITians`}
+                  <br /> Selection
+                </span>{" "}
+              </h2>
+            </motion.div>
+            <motion.div
+              whileInView={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className={
+                "md:absolute popAnimation bg-blue-900 rounded-3xl border border-white flex flex-col items-center p-2 sm:p-3 lg:p-5 bottom-[60%] left-[20%] scale-0 shadow-[0px_6px_35px_-7px_rgba(0,0,0,1)] drop-shadow-lg shadow-blue-500"
+              }
+            >
+              <h2 className={"text-center text-xs sm:text-lg lg:text-xl"}>
+                <span
+                  className={"sm:text-2xl lg:text-3xl text-xs font-extrabold"}
+                >
+                  {statsData.current
+                    ? statsData.current[0].statsDesc4
+                    : `12k+ \n
+                     Aspiring IITians`}
+                  <br /> Selection
+                </span>
+              </h2>
+            </motion.div>
           </div>
         </div>
+      </div>
+      <div
+        className={
+          "flex flex-row w-full justify-between px-10 gap-10 m-5 mb-14"
+        }
+      >
+        <button className={"text-primary text-lg sm:text-2xl lg:text-3xl"}>
+          2024
+        </button>
+
+        <button className={" text-lg sm:text-2xl lg:text-3xl"}>2023</button>
+        <button className={" text-lg sm:text-2xl lg:text-3xl"}>2022</button>
+        <button className={" text-lg sm:text-2xl lg:text-3xl"}>2021</button>
       </div>
     </section>
   );
 };
-export default ProspectusSection;
+export default StatisticSection;

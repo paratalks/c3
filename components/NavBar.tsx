@@ -2,20 +2,7 @@ import Image from "next/image";
 import { images, navLinks } from "@/constants";
 import { ChevronDown, Copy, Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+
 import { createQuery } from "@/actions/index.action";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -23,38 +10,7 @@ import ContactUsButton from "@/components/ContactUsButton";
 
 const NavBar = () => {
   const [showPhone, setShowPhone] = useState(false);
-  const [formData, setFormData] = useState({
-    studentName: "",
-    studentPhone: "",
-    studentEmail: "",
-    studentCity: "",
-    studentTarget: "",
-    studentQuery: "",
-  });
-  const isFormOpen = useRef(false);
-  const handleFormSubmit = async (event: any) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    await createQuery({
-      name: formData.get("query-name")?.toString(),
-      phone: formData.get("query-phone")?.toString(),
-      query: formData.get("query-desc")?.toString(),
-    });
-    setFormData({
-      studentName: "",
-      studentEmail: "",
-      studentPhone: "",
-      studentCity: "",
-      studentTarget: "",
-      studentQuery: "",
-    });
-    isFormOpen.current = false;
-  };
-  useEffect(() => {
-    setTimeout(() => {
-      isFormOpen.current = true;
-    }, 10000);
-  }, [isFormOpen.current]);
+
   return (
     <div className={"navbar-container max-sm:px-2"}>
       <div>
@@ -130,12 +86,20 @@ const NavBar = () => {
           </div>
         ))}
       </div>
-      {/*    add hover effect in the button on hovering the button a slight shadow should come out of the button of primary color  */}
+      {/* add hover effect in the button on hovering the button a slight shadow should come out of the button of primary color  */}
       <div className={"flex flex-col md:flex-row  md:gap-x-5 items-center"}>
         <div
           className={"flex flex-row gap-x-2 -translate-y-5 md:translate-y-0"}
         >
-          <Phone size={20} /> <p>{"8888-0000-21"}</p>
+          <button
+            onClick={() => {
+              redirect("tel:+918888000021");
+            }}
+          >
+            <Phone size={20} />{" "}
+          </button>
+
+          <p>{"8888-0000-21"}</p>
         </div>
         <ContactUsButton />
       </div>

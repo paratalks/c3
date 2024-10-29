@@ -100,20 +100,24 @@ const MentorSection = () => {
                   >
                     <div
                       className={
-                        " bottom-0 right-0 left-0 flex flex-col gap-8 bg-primary z-20 rounded-2xl p-6"
+                        " bottom-0 right-0 left-0 flex flex-col gap-8 bg-primary z-20 rounded-2xl p-4"
                       }
                     >
-                      <div className={"w-full flex flex-col relative"}>
+                      <div
+                        className={
+                          "w-full flex flex-col relative overflow-y-clip overflow-x-visible"
+                        }
+                      >
                         <div
                           className={
-                            "absolute bottom-0 w-full h-full z-10 rounded-3xl bg-gradient-to-t from-primary/[0.8] via-20% via-transparent to-transparent overflow-clip"
+                            "absolute bottom-0 w-full h-full z-10 rounded-3xl bg-gradient-to-t from-primary via-5% via-transparent to-transparent overflow-clip"
                           }
                         />
                         <motion.img
                           onClick={() => setAnimatingMentorIndex(index)}
                           onHoverStart={() => setAnimatingMentorIndex(index)}
                           onHoverEnd={() => setAnimatingMentorIndex(-1)}
-                          className={` mentorImages origin-bottom z-[5] transition-all duration-300 ${index == 0 ? "z-10" : "z-0"}`}
+                          className={` mentorImages translate-y-24 origin-bottom z-[5] transition-all duration-300 ${index == 0 ? "z-10" : "z-0"}`}
                           src={item.image}
                           alt={`Mentor ${index + 1}`}
                         />
@@ -126,7 +130,11 @@ const MentorSection = () => {
                           {item.title}
                         </h1>
                       </motion.div>
-                      <h2 className={"text-lg font-bold text-gray-200 mb-2"}>
+                      <h2
+                        className={
+                          "text-lg font-bold text-gray-200 mb-2 text-center"
+                        }
+                      >
                         {" "}
                         {item.desc}{" "}
                       </h2>
@@ -137,24 +145,22 @@ const MentorSection = () => {
             ) : (
               <div className="h-[90dvh] flex items-center justify-center">
                 {mentors.map((item, index) => (
-                  <>
-                    <motion.img
-                      key={index}
-                      onClick={() => setAnimatingMentorIndex(index)}
-                      onHoverStart={() => setAnimatingMentorIndex(index)}
-                      onHoverEnd={() => setAnimatingMentorIndex(-1)}
-                      whileInView={{
-                        x: [screen.width / item.movement],
-                      }}
-                      transition={{
-                        duration: item.animationDuration,
-                        ease: "easeOut",
-                      }}
-                      className={`absolute mentorImages origin-bottom z-[5] bottom-0 w-32 sm:w-44 lg:w-64 hover:w-40 hover:sm:w-56 hover:lg:w-80 transition-all duration-300 ${index == 0 ? "z-10" : "z-0"}`}
-                      src={item.image}
-                      alt={`Mentor ${index + 1}`}
-                    />
-                  </>
+                  <motion.img
+                    key={index}
+                    onClick={() => setAnimatingMentorIndex(index)}
+                    onHoverStart={() => setAnimatingMentorIndex(index)}
+                    onHoverEnd={() => setAnimatingMentorIndex(-1)}
+                    whileInView={{
+                      x: [screen.width / item.movement],
+                    }}
+                    transition={{
+                      duration: item.animationDuration,
+                      ease: "easeOut",
+                    }}
+                    className={`absolute mentorImages origin-bottom z-[5] bottom-0 w-32 sm:w-44 lg:w-64 hover:w-40 hover:sm:w-56 hover:lg:w-80 transition-all duration-300 ${index == 0 ? "z-10" : "z-0"}`}
+                    src={item.image}
+                    alt={`Mentor ${index + 1}`}
+                  />
                 ))}
               </div>
             )}

@@ -13,6 +13,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { createQuery } from "@/actions/index.action";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { FormControl } from "@/components/ui/form";
 
 const ContactUsButton = ({ variant = "primary" }) => {
   const [formData, setFormData] = useState({
@@ -70,6 +78,7 @@ const ContactUsButton = ({ variant = "primary" }) => {
               Name of student
             </Label>
             <Input
+              required={true}
               id="queryName"
               name={"query-name"}
               placeholder={"Full Name"}
@@ -88,6 +97,7 @@ const ContactUsButton = ({ variant = "primary" }) => {
               Phone of student
             </Label>
             <Input
+              required={true}
               id="queryPhone"
               name={"query-phone"}
               className={
@@ -106,6 +116,7 @@ const ContactUsButton = ({ variant = "primary" }) => {
               Email of student
             </Label>
             <Input
+              required={true}
               id="queryEmail"
               name={"query-email"}
               className={
@@ -124,6 +135,7 @@ const ContactUsButton = ({ variant = "primary" }) => {
               City of student
             </Label>
             <Input
+              required={true}
               id="queryCity"
               name={"query-city"}
               className={
@@ -141,25 +153,37 @@ const ContactUsButton = ({ variant = "primary" }) => {
             <Label htmlFor="" className="sr-only">
               Target course of student
             </Label>
-            <Input
-              id="queryTarget"
-              name={"query-target"}
-              className={
-                "bg-amber-50 text-black rounded-xl placeholder:text-gray-600"
-              }
-              placeholder={"Target Exam (eg. JEE/NEET/NISO)"}
-              value={formData.studentTarget}
-              onChange={(e) => {
+            <Select
+              required={true}
+              onValueChange={(e) => {
                 setFormData({
                   ...formData,
-                  studentTarget: e.currentTarget.value,
+                  studentTarget: e,
                 });
               }}
-            />
+              name={"query-target"}
+              defaultValue={formData.studentTarget}
+            >
+              <FormControl>
+                <SelectTrigger
+                  className={"bg-foreground text-background rounded-xl"}
+                >
+                  <SelectValue placeholder="Select a class" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent
+                className={"bg-foreground text-background rounded-xl"}
+              >
+                <SelectItem value="class11">Class 11</SelectItem>
+                <SelectItem value="class12">Class 12</SelectItem>
+                <SelectItem value="dropper">Dropper</SelectItem>
+              </SelectContent>
+            </Select>
             <Label htmlFor="" className="sr-only">
               Query of student
             </Label>
             <Textarea
+              required={true}
               id="queryDesc"
               name={"query-desc"}
               placeholder={"Your Query"}
@@ -182,7 +206,7 @@ const ContactUsButton = ({ variant = "primary" }) => {
                 className="px-3 rounded-2xl bg-secondary hover:bg-secondary mt-5 hover:scale-110 secondary-button-animation transition-all duration-300"
               >
                 <Link
-                  href={`/thankyou?name=${formData.studentName}&phone=${formData.studentPhone}&class=${formData.studentTarget}&email=${formData.studentEmail}`}
+                  href={`/formThankYou?name=${formData.studentName}&phone=${formData.studentPhone}&class=${formData.studentTarget}&email=${formData.studentEmail}`}
                 >
                   {`Make Me Champ`}
                 </Link>
