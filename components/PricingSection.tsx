@@ -47,7 +47,7 @@ const PricingSection = ({ courseFees = "3999" }) => {
                   Ultimate Crash Course for JEE Main - 2025
                 </h1>
                 <p>
-                  {`Revise Smarter, Score Higher with Experts mentors in
+                  {`Complete Your Syllabus Smarter, Score Higher with Experts mentors in
                     Competishun. Let's Crack JEE 2025`}
                 </p>
                 <a href="/enrollment">
@@ -127,7 +127,7 @@ const PricingSection = ({ courseFees = "3999" }) => {
                         className={"bg-foreground p-1 rounded-full"}
                         color={"#F15E04"}
                       />
-                      ₹ 2549 upon meeting above criteria
+                      ₹ 3389 upon meeting above criteria
                     </li>
                     <li className={"flex flex-row gap-x-2"}>
                       <Check
