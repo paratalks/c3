@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ScribledHighlightedText from "@/components/ScribledHighlightedText";
 import TestimonialWithStarRating from "@/components/testimonialWithStarRating";
 import Image from "next/image";
-import { blurs, testimonialData } from "@/constants";
+import { testimonialData } from "@/constants";
 import VideoTestimonial from "@/components/videoTestimonial";
 import TextTesimonialWithImage from "@/components/textTesimonialWithImage";
 import {
