@@ -472,7 +472,7 @@ export default function Home() {
                         </li>
                         <li className="mb-4 hover:text-white">
                           <a
-                            href="https://competishun.com/"
+                            href="https://c3.competishun.in/"
                             className="hover:underline"
                           >
                             FAQ
