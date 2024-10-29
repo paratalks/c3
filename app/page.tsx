@@ -1,7 +1,7 @@
 "use client";
 import NavBar from "@/components/NavBar";
 import Image from "next/image";
-import { blurs, constData, icons, images, scribles, sounds } from "@/constants";
+import { blurs, icons, images, scribles, sounds } from "@/constants";
 import React, { useEffect, useRef, useState } from "react";
 import useSound from "use-sound";
 import { motion, useAnimate } from "framer-motion";
