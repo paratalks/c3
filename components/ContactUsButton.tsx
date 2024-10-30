@@ -104,7 +104,6 @@ const ContactUsButton = ({ variant = "primary" }) => {
             </Label>
             <Input
               required={true}
-              id="queryPhone"
               name={"query-phone"}
               className={
                 "bg-amber-50 text-black rounded-xl placeholder:text-gray-600"
