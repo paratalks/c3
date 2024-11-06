@@ -27,10 +27,15 @@ import { images } from "@/constants";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Script from "next/script";
+import { createEnrollment } from "@/actions/index.action";
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().min(2, {
+    message: "Email must be at least 2 characters.",
   }),
   phone: z.string().regex(/^\d{10}$/, {
     message: "Phone number must be 10 digits.",
@@ -54,6 +59,7 @@ export default function EnrollmentForm() {
     defaultValues: {
       name: "",
       phone: "",
+      email: "",
       class: "",
       city: "",
       state: "",
@@ -61,8 +67,9 @@ export default function EnrollmentForm() {
   });
   const { toast } = useToast();
   const amount = "3999";
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
+
     processPayment();
 
     // Here you would typically send the form data to your server
@@ -92,6 +99,16 @@ export default function EnrollmentForm() {
   };
   const processPayment = async () => {
     try {
+      const data = {
+        name: form.getValues("name"),
+        phone: form.getValues("phone"),
+        email: form.getValues("email"),
+        class: form.getValues("class"),
+        city: form.getValues("city"),
+        state: form.getValues("state"),
+        course: "Champ",
+      };
+      await createEnrollment(data);
       const orderId: string = await createOrderId();
       const options = {
         key: process.env.key_id,
@@ -117,8 +134,9 @@ export default function EnrollmentForm() {
           if (res.isOk) {
             setLoading(false);
             alert("payment succeed");
-            await router.push(
-              `/thankyou?name=${form.getValues("name")}&phone=${form.getValues("phone")}&class=${form.getValues("class")}&transactionId=${response.razorpay_payment_id}&orderId=${response.razorpay_order_id}&currency=INR&amount=3999`,
+
+            router.push(
+              `/thankyou?name=${form.getValues("name")}&phone=${form.getValues("phone")}&class=${form.getValues("class")}&email=${form.getValues("email")}&transactionId=${response.razorpay_payment_id}&orderId=${response.razorpay_order_id}&currency=INR&amount=3999`,
             );
           } else {
             setLoading(false);
@@ -150,7 +168,10 @@ export default function EnrollmentForm() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-primary/20 to-background">
       <header className="w-full p-4 border-b flex flex-row items-center">
-        <Image src={images.logo} alt={"Logo"} width={50} height={50} />
+        <a href="/">
+          {" "}
+          <Image src={images.logo} alt={"Logo"} width={50} height={50} />
+        </a>
         <h1 className="text-2xl flex-1 font-bold text-center pr-10">
           Competishun Student Enrollment Form
         </h1>
@@ -171,6 +192,7 @@ export default function EnrollmentForm() {
                     <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input
+                        required={true}
                         className={"bg-foreground text-background rounded-xl"}
                         placeholder="John Doe"
                         {...field}
@@ -188,6 +210,8 @@ export default function EnrollmentForm() {
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
                       <Input
+                        required={true}
+                        type={"number"}
                         className={"bg-foreground text-background rounded-xl"}
                         placeholder="1234567890"
                         {...field}
@@ -202,11 +226,30 @@ export default function EnrollmentForm() {
               />
               <FormField
                 control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        required={true}
+                        className={"bg-foreground text-background rounded-xl"}
+                        placeholder="Your Email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="class"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Class</FormLabel>
                     <Select
+                      required={true}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -237,6 +280,7 @@ export default function EnrollmentForm() {
                     <FormLabel>City</FormLabel>
                     <FormControl>
                       <Input
+                        required={true}
                         className={"bg-foreground text-background rounded-xl"}
                         placeholder="Your City"
                         {...field}
@@ -246,6 +290,7 @@ export default function EnrollmentForm() {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="state"
@@ -254,6 +299,7 @@ export default function EnrollmentForm() {
                     <FormLabel>State</FormLabel>
                     <FormControl>
                       <Input
+                        required={true}
                         className={"bg-foreground text-background rounded-xl"}
                         placeholder="Your State"
                         {...field}
@@ -272,9 +318,27 @@ export default function EnrollmentForm() {
       </main>
 
       <footer className="w-full p-4 border-t text-center text-sm text-muted-foreground">
+        <Script id={"formThankYouTrackingCode"}>
+          {`window.addEventListener("load", function () {
+            if (window.location.href.indexOf('/thankyou') != -1 && window.location.href.indexOf('?name=') != -1) {
+              var totalVal = decodeURIComponent(window.location.href).split("transactionId=")[1].split("&")[0]
+              var orderId = decodeURIComponent(window.location.href).split("amount=")[1].split("&")[0]
+              gtag("event", "conversion", {
+                send_to: "AW-10838004875/GwYGCL6oxeEZEIup-68o",
+                value: parseFloat(totalVal),
+                currency: "INR",
+                transaction_id: orderId,
+              })
+            }
+            if (window.location.pathname.includes("/formThankYou") != -1) {
+              gtag("event", "conversion", {
+                send_to: "AW-10838004875/gddNCMGoxeEZEIup-68o",
+              })
+            }
+          })`}
+        </Script>
         <p>
-          &copy; {new Date().getFullYear()} Your Educational Institute. All
-          rights reserved.
+          &copy; {new Date().getFullYear()} Competishun. All rights reserved.
         </p>
       </footer>
     </div>
