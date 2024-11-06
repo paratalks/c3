@@ -20,9 +20,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
-import { X } from "lucide-react";
+import { CircleHelp, X } from "lucide-react";
 
-const ContactUsButton = ({ variant = "primary", openDialog = false }) => {
+const LeadFormWidget = ({ variant = "primary", openDialog = false }) => {
   const [formDataTemp, setFormData] = useState({
     studentName: "",
     studentPhone: "",
@@ -68,14 +68,16 @@ const ContactUsButton = ({ variant = "primary", openDialog = false }) => {
   return (
     <Dialog open={isFormOpen}>
       <DialogTrigger asChild>
-        <button
-          onClick={() => {
-            setIsFormOpen(true);
-          }}
-          className={` text-xs sm:text-lg font-bold w-fit contact-us-button ${variant}-button-animation flex flex-row bg-${variant} rounded-xl py-2.5 px-5 transition-all duration-300`}
-        >
-          {"Contact Us"}
-        </button>
+        <div className={"fixed bottom-20 right-0 px-4 z-40"}>
+          <button
+            className={`font-bold contact-us-button ${variant}-button-animation flex flex-row bg-${variant} rounded-full p-2 transition-all duration-300`}
+            onClick={() => {
+              setIsFormOpen(true);
+            }}
+          >
+            <CircleHelp size={40} />
+          </button>
+        </div>
       </DialogTrigger>
       <DialogContent
         className="sm:max-w-md rounded-3xl p-8 bg-primary"
@@ -240,4 +242,4 @@ const ContactUsButton = ({ variant = "primary", openDialog = false }) => {
     </Dialog>
   );
 };
-export default ContactUsButton;
+export default LeadFormWidget;

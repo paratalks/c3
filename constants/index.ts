@@ -9,6 +9,7 @@ export const images = {
   halfCirclePrimary: "/assets/images/halfCirclePrimary.svg",
   guyWithTshirt: "/assets/images/guyWithTshirt.png",
   halfCircleNonPrimary: "/assets/images/halfCircleNonPrimary.svg",
+  results: "/assets/images/result.jpeg",
 };
 
 export const aboutusImages = [
@@ -45,7 +46,7 @@ export const mentorImages = {
   aloksir: "/assets/images/mentors/aloksir.png",
   mohitsir: "/assets/images/mentors/mohitsir.png",
   neerajsir: "/assets/images/mentors/neerajsir.png",
-  collective: "/assets/image/mentors/group_pic.png",
+  collective: "/assets/images/mentors/group_pic.png",
 };
 
 export const sounds = {
@@ -107,24 +108,27 @@ export const heroSectionHastags = [
 
 export const Faqs = [
   {
-    question: "Will I get Physical Study Material?",
+    question:
+      "How does the C3 course help students who haven’t completed their syllabus yet?",
     answer:
-      "With this Course Purchase, you will get only Digital Study Material like DPP’s and their respective Text and Video Solution. Physical Study Material is not provided with this Short term Course.",
+      "The C3 course is designed to help students complete their syllabus quickly with a structured approach, allowing them to cover crucial topics before the exams effectively.",
   },
   {
-    question: "Will Classes be any Live Classes?",
+    question: "Will we have Guidance Session for JEE MAIN Preparation? ",
     answer:
-      "There will be only Recorded Scheduled Lectures will be provided. In week there will be LIVE INTERACTION Session for your guidance for 30 Minutes.",
+      "Yes, your batch will have regular guidance Session once in a week where you ask your doubts related to JEE MAIN preparation directly with MT Sir, ABJ Sir, ALK Sir or NS Sir. ",
   },
   {
-    question: "Will Test be conducted in this course? ",
+    question:
+      "Will I be able to improve my rank by joining C3 even if I’m starting late?",
     answer:
-      "Test will be conducted on weekly basis as per test grid that will be provided to you along with the course. Test will be conducted on COMPETISHUN DIGITAL APP / WEBSITE and we will share the complete details in your Official Support Prior to your 1st test.",
+      "Absolutely! C3 focuses on essential topics and provides targeted preparation that has helped many students improve their rank in a short period.",
   },
   {
-    question: "Will Doubt clearing session will be conducted?",
+    question:
+      "Is the course updated as per the latest reduced syllabus of NTA?",
     answer:
-      "you can ask your doubts in your doubt groups tagging faculties and you will get a reply at the earliest.",
+      "Yes, the course has been designed as per the latest reduced syllabus for JEE Main 2025 as released by NTA.",
   },
   {
     question: "How Do you contact Support Staff of Competishun?",
@@ -227,41 +231,32 @@ export const feature_Row1 = [
   {
     title: "Expert Faculty",
     desc: "Our experienced and highly qualified instructors are experts in their respective fields, providing students with top-notch guidance, personalized attention, and valuable insights to tackle the JEE Main.",
+    image: illustrations.illustration1,
   },
   {
     title: "Rigorous Curriculum",
     desc: "The course is meticulously crafted to cover the entire JEE Main syllabus. We prioritize essential topics, offer in-depth explanations, and provide ample practice material to strengthen your understanding",
+    image: illustrations.illustration1,
   },
   {
     title: "Time-Efficient",
     desc: "Designed as a condensed program, the crash course optimizes your preparation time, making it ideal for students with tight schedules or those looking for a last-minute refresher",
+    image: illustrations.illustration1,
   },
   {
     title: "Mock Tests and Practice Papers",
     desc: "To gauge your progress and build confidence, we offer a series of mock tests and practice papers that simulate the actual exam.",
+    image: illustrations.illustration1,
   },
   {
     title: "Doubt Resolution",
     desc: "Our dedicated doubt-clearing sessions ensure that no question remains unanswered. Feel free to ask questions, seek clarification, and reinforce your topics",
+    image: illustrations.illustration1,
   },
   {
     title: "Digital Study Materials",
     desc: "Our meticulously curated Digital study materials resources will be provided",
-  },
-];
-
-export const feature_Row2 = [
-  {
-    title: "Mock Tests and Practice Papers",
-    desc: "To gauge your progress and build confidence, we offer a series of mock tests and practice papers that simulate the actual exam.",
-  },
-  {
-    title: "Doubt Resolution",
-    desc: "Our dedicated doubt-clearing sessions ensure that no question remains unanswered. Feel free to ask questions, seek clarification, and reinforce your topics",
-  },
-  {
-    title: "Digital Study Materials",
-    desc: "Our meticulously curated Digital study materials resources will be provided",
+    image: illustrations.illustration1,
   },
 ];
 

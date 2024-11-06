@@ -26,6 +26,7 @@ import {
   getTestimonialData,
 } from "@/lib/fetchData";
 import { Models } from "appwrite";
+import LeadFormWidget from "@/components/LeadFormWidget";
 export default function Home() {
   const [clipPath, setClipPath] = useState("circle(0%)");
   const imageContainerRef = useRef(null);
@@ -64,10 +65,9 @@ export default function Home() {
   };
   // use effect for animations
   useEffect(() => {
-    setScreen({ width: window.innerWidth, height: window.innerHeight });
     popFeatureModalAnimation();
     twinkleAnimationHandler();
-  }, [screen.width, screen.height]);
+  }, []);
   // use effect to fetch data
   const fetchData = async () => {
     await getData().then((res) => setData(res));
@@ -75,6 +75,19 @@ export default function Home() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setScreen({ width: window.innerWidth, height: window.innerHeight });
+    const handleResize = () => {
+      setScreen({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up on unmount
+    };
+  }, []);
+
   // handling mouse move on model on hero section
   const handleMouseMove = (e: { clientX: number; clientY: number }) => {
     if (!imageContainerRef.current) return;
@@ -101,21 +114,20 @@ export default function Home() {
     );
   };
   return (
-    <div className="w-full flex relative flex-col items-center">
+    <div className="w-full max-w-screen flex relative flex-col items-center">
       <div
-        className={"z-40 w-screen overflow-hidden md:flex hidden"}
+        className={"z-40 w-screen overflow-hidden "}
         id="chat-widget"
         data-key="670f87c42f6b943716677af3"
       ></div>
+      <LeadFormWidget />
       <div className={"w-11/12 flex flex-col"}>
         <section
-          className={
-            "hero-section flex flex-col w-full h-[120vh] md:h-screen relative"
-          }
+          className={"hero-section flex flex-col w-full h-[120vh]  relative"}
         >
           <div
             className={
-              "background-gradients w-full h-full flex items-center justify-center"
+              "background-gradients w-full h-full -z-10 flex items-center justify-center"
             }
           >
             <Image
@@ -139,7 +151,7 @@ export default function Home() {
                   delay: 0.2,
                 }}
                 className={
-                  "absolute select-none sm:w-14 w-10 top-1/2 left-[20%] -z-40"
+                  "absolute hidden sm:flex select-none sm:w-14 w-10 top-1/2 left-[20%] -z-40"
                 }
                 src={icons.rolledDegree}
                 alt={"Rolled Degree Icom"}
@@ -177,49 +189,45 @@ export default function Home() {
                 alt={"Rolled Degree Icom"}
               />
             </div>
-            <div
-              className={
-                "absolute w-screen h-full modelImageContainer flex flex-col items-center origin-bottom"
-              }
-            >
-              <Image
-                unoptimized
-                onMouseLeave={handleMouseLeave}
-                src={images.modelImageHeroSec}
-                className={`absolute max-h-[50%]  max-w-[80%]  bottom-0 z-10 ${activateTransition ? "transition-all duration-1000" : ""}`}
-                alt={"Competishun Model"}
-                width={heroSectionModelDimension}
-                height={heroSectionModelDimension}
-                style={{ clipPath: clipPath, transform: "translate(0, 6%)" }}
-              />
-              <Image
-                unoptimized
-                src={images.modelImageHeroSec}
-                className={`absolute max-h-[50%] max-w-[80%]  bottom-0 filter brightness-[50] -z-[3] -translate-x-1 translate-y-[6%]`}
-                alt={"Competishun Model"}
-                width={heroSectionModelDimension}
-                height={heroSectionModelDimension}
-              />
-              <Image
-                unoptimized
-                src={images.modelImageHeroSec}
-                className={`absolute max-h-[50%]  max-w-[80%]  bottom-0 filter blur-xl -z-[2] -translate-x-1 translate-y-[6%]`}
-                alt={"Competishun Model"}
-                width={heroSectionModelDimension}
-                height={heroSectionModelDimension}
-              />
-              <Image
-                unoptimized
-                ref={imageContainerRef}
-                onMouseMove={handleMouseMove}
-                src={images.modelImageHeroSec}
-                className={`absolute max-h-[50%] max-w-[80%] bottom-0 ${activateTransition ? "transition-all duration-1000" : ""}  `}
-                alt={"Competishun Model"}
-                width={heroSectionModelDimension}
-                height={heroSectionModelDimension}
-                style={{ transform: "translate(0, 6%)" }}
-              />
-            </div>
+
+            <Image
+              unoptimized
+              onMouseLeave={handleMouseLeave}
+              src={images.modelImageHeroSec}
+              className={`absolute max-h-[50%]  max-w-[80%]  bottom-0 z-10 ${activateTransition ? "transition-all duration-1000" : ""}`}
+              alt={"Competishun Model"}
+              width={heroSectionModelDimension}
+              height={heroSectionModelDimension}
+              style={{ clipPath: clipPath, transform: "translate(0, 6%)" }}
+            />
+            <Image
+              unoptimized
+              src={images.modelImageHeroSec}
+              className={`absolute max-h-[50%] max-w-[80%]  bottom-0 filter brightness-[50] -z-[3] -translate-x-1 translate-y-[6%]`}
+              alt={"Competishun Model"}
+              width={heroSectionModelDimension}
+              height={heroSectionModelDimension}
+            />
+            <Image
+              unoptimized
+              src={images.modelImageHeroSec}
+              className={`absolute max-h-[50%]  max-w-[80%]  bottom-0 filter blur-xl -z-[2] -translate-x-1 translate-y-[6%]`}
+              alt={"Competishun Model"}
+              width={heroSectionModelDimension}
+              height={heroSectionModelDimension}
+            />
+            <Image
+              unoptimized
+              ref={imageContainerRef}
+              onMouseMove={handleMouseMove}
+              src={images.modelImageHeroSec}
+              className={`absolute max-h-[50%] max-w-[80%] bottom-0 ${activateTransition ? "transition-all duration-1000" : ""}  `}
+              alt={"Competishun Model"}
+              width={heroSectionModelDimension}
+              height={heroSectionModelDimension}
+              style={{ transform: "translate(0, 6%)" }}
+            />
+
             <div className={"w-screen features-modal"}>
               <motion.div
                 ref={scope}
@@ -326,7 +334,7 @@ export default function Home() {
                 " text-xs sm:text-xl lg:text-lg mt-6 sm:mt-3 text-center xl:w-1/2 w-full mb-6 lg:mb-2 max-sm:text-gray-500"
               }
             >
-              {`he Competishun Crash Course (C³ - 2025) is an intensive and focused program designed to help students maximize their potential and achieve exceptional results in the JEE Main examination `}
+              {`The Competishun Crash Course (C³ - 2025) is an intensive and focused program designed to help students maximize their potential and achieve exceptional results in the JEE Main examination `}
             </p>
             <a href="#pricing-section" className={"z-20"}>
               <motion.button
@@ -472,14 +480,14 @@ export default function Home() {
                         </li>
                         <li className="mb-4 hover:text-white">
                           <a
-                            href="https://c3.competishun.in/"
+                            href="https://champ.competishun.com/"
                             className="hover:underline"
                           >
                             FAQ
                           </a>
                         </li>
                         <li className={"hover:text-white"}>
-                          <a href="https://c3.competishun.in/">FAQ</a>
+                          <a href="https://champ.competishun.com/">FAQ</a>
                         </li>
                       </ul>
                     </div>
@@ -510,7 +518,7 @@ export default function Home() {
                 <span className="text-sm  sm:text-center  text-gray-400">
                   © 2024{" "}
                   <a
-                    href="https://c3.competishun.in/"
+                    href="https://champ.competishun.com/"
                     className="hover:underline"
                   >
                     Competishun™
