@@ -106,7 +106,7 @@ export default function EnrollmentForm() {
         class: form.getValues("class"),
         city: form.getValues("city"),
         state: form.getValues("state"),
-        course: "Champ",
+        course: "c3",
       };
       await createEnrollment(data);
       const orderId: string = await createOrderId();
