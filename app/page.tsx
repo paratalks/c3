@@ -27,6 +27,7 @@ import {
 } from "@/lib/fetchData";
 import { Models } from "appwrite";
 import LeadFormWidget from "@/components/LeadFormWidget";
+import ResultShowcase from "@/components/ResultShowcase";
 export default function Home() {
   const [clipPath, setClipPath] = useState("circle(0%)");
   const imageContainerRef = useRef(null);
@@ -434,7 +435,7 @@ export default function Home() {
           <PricingSection courseFees={data && data.documents[0].price} />
         </div>
         <StatisticSection />
-
+        <ResultShowcase />
         <MentorSection />
 
         <ProspectusSection />
