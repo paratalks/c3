@@ -51,8 +51,7 @@ const FeaturesSections = () => {
           />
           <h1 className={" text-center lg:text-5xl  sm:text-4xl text-4xl px-4"}>
             Get All the <ScribledHighlightedText textInput={"benefit"} /> of our
-            iconic <br className="hidden sm:block" /> revision course, Enroll
-            Now!
+            iconic <br className="hidden sm:block" /> crash course, Enroll Now!
           </h1>
           <div
             className={

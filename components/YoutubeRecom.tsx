@@ -38,9 +38,7 @@ const YoutubeRecom = ({
           src={youtubeLink}
           frameBorder="0"
           width={"100%"}
-          className={
-            "rounded-3xl  h-[40vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]"
-          }
+          className={"rounded-3xl aspect-[16/9]"}
           allowFullScreen
         />
       </div>
