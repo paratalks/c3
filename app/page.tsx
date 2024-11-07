@@ -305,7 +305,7 @@ export default function Home() {
                 "hero-title text-5xl sm:text-7xl lg:text-5xl xl:text-7xl text-wrap font-extrabold text-center"
               }
             >
-              {`Get into `}
+              {`Complete your`}
               <span
                 className={
                   "bg-gradient-to-r relative from-primary via-50% via-white to-blue-500 text-transparent bg-clip-text"
@@ -313,21 +313,21 @@ export default function Home() {
               >
                 <motion.img
                   className={
-                    "absolute w-9 sm:w-12 lg:w-16 -top-2 -left-3 sm:-top-2 sm:-left-3 lg:-top-5 lg:-left-6"
+                    "absolute w-9 sm:w-12 lg:w-16 -top-2 -left-1 sm:-top-2 sm:left-1 lg:-top-5 lg:-left-2"
                   }
                   src={icons.degreeHat}
                   alt={"Degree Hat"}
                 />
-                {` IIT `}
+                {` JEE `}
               </span>
-              {`with Competishun,`}
+              {`Syllabus`}
             </h1>
             <h1
               className={
                 "hero-title text-5xl sm:text-7xl mt-2 lg:text-5xl xl:text-7xl font-extrabold text-wrap text-center"
               }
             >
-              <span className={"text-primary"}>99 Percentile</span> Dream begins
+              <span className={"text-primary"}>Chase</span> your dream rank!
             </h1>
             <p
               className={

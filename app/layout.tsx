@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
@@ -13,7 +13,13 @@ const hkgothicBold = localFont({
   variable: "--font-gothic-sans-bold",
   weight: "300 400 800 900",
 });
-
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  initialScale: 1,
+  width: "device-width",
+  maximumScale: 1,
+  userScalable: false,
+};
 export const metadata: Metadata = {
   title: "Competishun",
   description: "Best website for preparing for JEE and NEET",
