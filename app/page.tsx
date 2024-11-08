@@ -434,7 +434,6 @@ export default function Home() {
         <div className={" flex flex-col items-center"}>
           <PricingSection courseFees={data && data.documents[0].price} />
         </div>
-        <StatisticSection />
         <ResultShowcase />
         <MentorSection />
 
